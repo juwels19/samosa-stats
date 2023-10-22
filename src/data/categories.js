@@ -1,0 +1,16 @@
+export const categoryOptions = [
+  "Winners & Losers of Biggest Upset",
+  "Top 3 Foul Points Given",
+  "Second Last Pick",
+  "Top 5 Left out of Elims",
+  "Team Captain with the lowest OPR",
+  "3rd Alliance Captain",
+  "Losers in Highest Scored Match from one Alliance (with Fouls)",
+  "Biggest difference between Cones vs Cubes",
+  "More Auto Docks than End Game Docks (Team)",
+  "Least Teleop Engaged (Team)",
+  "Most Selfish Team (least co-op points)",
+  "Most Mid team (Most game pieces scored on the middle rack)",
+  "Top 3 teams in auto game pieces",
+  "3rd Most Sustainability RP",
+];
