@@ -4,6 +4,7 @@ import { Button } from "@nextui-org/button";
 import { useDisclosure } from "@nextui-org/react";
 import ErrorModal from "../modals/ErrorModal";
 import SuccessModal from "../modals/SuccessModal";
+import { generateEventSubmissionsOpenMessage } from "@/utils/discordWebhook";
 
 export default function EventSetupForm(props) {
   const [event, setEvent] = useState(props.event);
@@ -72,6 +73,7 @@ export default function EventSetupForm(props) {
     _event = _event.body;
     setEvent(_event);
     setIsSetup(_event.isSetup);
+    generateEventSubmissionsOpenMessage(event.name);
     setIsUpdateLoading(false);
     onSuccessModalOpen();
   };

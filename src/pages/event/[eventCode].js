@@ -40,7 +40,7 @@ export default function EventPage(props) {
       <p className="font-semibold text-2xl text-center px-8 pb-6">
         Submit your picks for {event.name}
       </p>
-      {event.isComplete || !event.isSubmissionClosed ? (
+      {!event.isComplete && !event.isSubmissionClosed ? (
         <Tabs
           aria-label="Tabs for Picks"
           color="primary"

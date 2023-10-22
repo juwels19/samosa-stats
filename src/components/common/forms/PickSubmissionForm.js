@@ -122,7 +122,7 @@ export default function PickSubmissionForm(props) {
         defaultValue={displayName}
         className="px-5 md:px-0 pt-4"
         isInvalid={isDisplayNameInvalid}
-        isDisabled={!(isComplete || !isSubmissionClosed)}
+        isDisabled={isComplete && isSubmissionClosed}
         onChange={(event) => handleDisplayNameChange(event.target.value)}
         description={
           isComplete || !isSubmissionClosed
@@ -130,7 +130,7 @@ export default function PickSubmissionForm(props) {
             : ""
         }
       />
-      {(isComplete || !isSubmissionClosed) && (
+      {!isComplete && !isSubmissionClosed && (
         <Button
           color="success"
           onClick={handleSubmitPicks}

@@ -107,6 +107,7 @@ export default function Setup(props) {
                     startDate={event.startDate}
                     endDate={event.endDate}
                     eventCode={event.eventCode}
+                    isSetup={event.isSetup}
                     isAdminCard
                   />
                 </div>

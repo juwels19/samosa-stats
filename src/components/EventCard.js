@@ -11,6 +11,7 @@ export default function EventCard(props) {
     eventCode,
     isAdminCard,
     isComplete,
+    isSetup,
   } = props;
 
   const router = useRouter();
@@ -46,6 +47,11 @@ export default function EventCard(props) {
               .format("MMMM Do, h:mm:ss a")}
           </span>
         </p>
+        {isAdminCard && isSetup && (
+          <p className="font-bold text-sm text-center pt-6">
+            * Event Setup Complete *{" "}
+          </p>
+        )}
       </CardBody>
     </Card>
   );

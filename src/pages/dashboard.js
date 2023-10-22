@@ -7,8 +7,8 @@ export default function Dashboard(props) {
   const { setupEvents, completeEvents } = props;
 
   return (
-    <div className="z-10 py-8 flex flex-col max-w-5xl items-center justify-between gap-8">
-      <p className="text-3xl">Events open for submission:</p>
+    <div className="z-10 py-8 px-4 flex flex-col max-w-5xl items-center justify-between gap-8">
+      <p className="text-3xl text-center">Events open for submission:</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {setupEvents.map((event) => (
           <EventCard
@@ -20,7 +20,7 @@ export default function Dashboard(props) {
           />
         ))}
       </div>
-      <p className="text-3xl">Completed events:</p>
+      <p className="text-3xl text-center">Completed events:</p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {completeEvents.map((event) => (
           <EventCard
