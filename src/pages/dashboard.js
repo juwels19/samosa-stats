@@ -21,7 +21,11 @@ export default function Dashboard(props) {
         ))}
       </div>
       <p className="text-3xl text-center">Completed events:</p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div
+        className={`grid grid-cols-1 ${
+          completeEvents.length > 1 ? "md:grid-cols-2" : ""
+        } gap-6`}
+      >
         {completeEvents.map((event) => (
           <EventCard
             key={event.name}

@@ -72,7 +72,11 @@ export default function TeamSelectionForm(props) {
               key={team.number}
               variant={selectedTeams[index] ? "solid" : "light"}
               color={selectedTeams[index] ? "success" : ""}
-              className="justify-start whitespace-normal md:truncate md:text-lg"
+              className={`justify-start whitespace-normal md:truncate md:text-lg ${
+                selectedTeams[index]
+                  ? ""
+                  : "hover:bg-slate-200 dark:hover:bg-slate-800"
+              }`}
               size="sm"
               onPress={() => handleTeamClick(index)}
             >
@@ -94,7 +98,11 @@ export default function TeamSelectionForm(props) {
                   ? "success"
                   : ""
               }
-              className="justify-start whitespace-normal md:truncate md:text-lg"
+              className={`justify-start whitespace-normal md:truncate md:text-lg ${
+                selectedTeams[index + Math.ceil(teams.length / 2)]
+                  ? ""
+                  : "hover:bg-slate-200 dark:hover:bg-slate-800"
+              }`}
               size="sm"
               onPress={() =>
                 handleTeamClick(index + Math.ceil(teams.length / 2))

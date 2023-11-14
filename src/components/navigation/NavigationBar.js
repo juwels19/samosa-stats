@@ -34,18 +34,18 @@ export default function NavigationBar(props) {
       <NavbarContent justify="start">
         <NavbarBrand>
           <p
-            className="text-inherit hidden pl-4 font-bold md:inline hover:cursor-pointer"
+            className="text-inherit pl-4 font-bold hover:cursor-pointer"
             onClick={() => router.push("/")}
           >
             Samosa Stats
           </p>
         </NavbarBrand>
       </NavbarContent>
-      <NavbarContent justify="center" className="hidden gap-6 md:flex">
+      {/* <NavbarContent justify="center" className="hidden gap-6 md:flex">
         {navigationItems.map((item) => (
           <NavigationItem key={item.label} item={item} />
         ))}
-      </NavbarContent>
+      </NavbarContent> */}
       <NavbarContent justify="end">
         <ThemeSwitchButton />
         <SignedIn>
@@ -54,7 +54,7 @@ export default function NavigationBar(props) {
         <SignedOut>
           <CustomSignInButton />
         </SignedOut>
-        <NavbarMenuToggle
+        {/* <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="md:hidden"
         />
@@ -64,7 +64,7 @@ export default function NavigationBar(props) {
           {navigationItems.map((item) => (
             <NavigationItem key={item.label} item={item} />
           ))}
-        </NavbarMenu>
+        </NavbarMenu> */}
       </NavbarContent>
     </Navbar>
   );

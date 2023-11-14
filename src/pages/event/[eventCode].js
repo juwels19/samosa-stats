@@ -1,5 +1,5 @@
 import prisma from "@prisma/index";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { clerkClient, getAuth } from "@clerk/nextjs/server";
 
 import { Tabs, Tab } from "@nextui-org/tabs";
@@ -10,7 +10,12 @@ import getTeamsForEvent from "@/utils/getTeamsForEvent";
 import PickSubmissionForm from "@/components/common/forms/PickSubmissionForm";
 
 import { categoryOptions } from "@/data/categories";
-import { tbaEndpoint } from "@/constants";
+import {
+  tbaEndpoint,
+  tbaEventBasePath,
+  statboticsEventBasePath,
+} from "@/constants";
+import { Button } from "@nextui-org/button";
 
 export default function EventPage(props) {
   const { event, userId, userFullname } = props;
@@ -37,14 +42,35 @@ export default function EventPage(props) {
 
   return (
     <div className="z-10 pt-6 pb-12 flex flex-col max-w-5xl items-center justify-between gap-2">
-      <p className="font-semibold text-2xl text-center px-8 pb-6">
+      <p className="font-semibold text-2xl text-center px-8 pb-4">
         Submit your picks for {event.name}
       </p>
+      <div className="flex flex-row justify-center gap-8">
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={`${tbaEventBasePath}${event.eventCode}`}
+        >
+          <Button className="mb-4 bg-tba-blue text-white">
+            View Event on The Blue Alliance
+          </Button>
+        </a>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={`${statboticsEventBasePath}${event.eventCode}`}
+        >
+          <Button className="mb-4 bg-tba-blue text-white">
+            View Event on Statbotics
+          </Button>
+        </a>
+      </div>
+
       {!event.isComplete && !event.isSubmissionClosed ? (
         <Tabs
           aria-label="Tabs for Picks"
           color="primary"
-          classNames={{ tabList: "mb-6" }}
+          classNames={{ tabList: "mb-2" }}
         >
           <Tab key="teams" title="Teams">
             <TeamSelectionForm
