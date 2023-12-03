@@ -52,7 +52,7 @@ export default function NavigationBar(props) {
           <UserButton afterSignOutUrl="/" />
         </SignedIn>
         <SignedOut>
-          <CustomSignInButton />
+          <CustomSignInButton label="Sign In" />
         </SignedOut>
         {/* <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}

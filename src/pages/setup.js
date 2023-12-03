@@ -7,6 +7,7 @@ import { useDisclosure } from "@nextui-org/react";
 import createEventsForSeason from "@/utils/createEventsForSeason";
 import EventCard from "@/components/EventCard";
 import ErrorModal from "@/components/common/modals/ErrorModal";
+import Head from "next/head";
 
 export default function Setup(props) {
   const { currentSeason, events, year } = props;
@@ -75,6 +76,9 @@ export default function Setup(props) {
 
   return (
     <div className="z-10 py-8 px-10 flex flex-col max-w-5xl items-center text-center justify-between gap-8">
+      <Head>
+        <title>Setup | Samosa Stats</title>
+      </Head>
       {_currentSeason.length === 0 ? (
         <>
           <p className="font-semibold text-xl md:text-2xl">
@@ -137,7 +141,8 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const year = moment().year();
+  // const year = moment().year();
+  const year = 2024;
   const currentSeason = await prisma.season.findMany({
     where: {
       year: year,

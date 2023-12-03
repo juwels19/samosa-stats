@@ -5,11 +5,16 @@ import prisma from "@prisma/index";
 import CategoryList from "@/components/common/CategoryList";
 import { categoryOptions } from "@/data/categories";
 import EventSetupForm from "@/components/common/forms/EventSetupForm";
+import Head from "next/head";
 
 export default function EventSetupPage(props) {
   const { event } = props;
+  console.log(event.picks);
   return (
     <div className="z-10 pt-6 pb-12 flex flex-col max-w-5xl items-center justify-between gap-6">
+      <Head>
+        <title>Event Setup | Samosa Stats</title>
+      </Head>
       <p className="font-semibold text-2xl text-center">
         {event.name} Setup Page
       </p>
@@ -46,6 +51,9 @@ export async function getServerSideProps(context) {
   const event = await prisma.event.findMany({
     where: {
       eventCode: eventCode,
+    },
+    include: {
+      picks: true,
     },
   });
   return {

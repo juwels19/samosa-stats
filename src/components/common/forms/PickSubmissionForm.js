@@ -125,7 +125,7 @@ export default function PickSubmissionForm(props) {
         isDisabled={isComplete && isSubmissionClosed}
         onChange={(event) => handleDisplayNameChange(event.target.value)}
         description={
-          isComplete || !isSubmissionClosed
+          !isComplete || !isSubmissionClosed
             ? `${100 - displayName.length} characters remaining`
             : ""
         }

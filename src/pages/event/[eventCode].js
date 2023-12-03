@@ -16,6 +16,7 @@ import {
   statboticsEventBasePath,
 } from "@/constants";
 import { Button } from "@nextui-org/button";
+import Head from "next/head";
 
 export default function EventPage(props) {
   const { event, userId, userFullname } = props;
@@ -42,6 +43,9 @@ export default function EventPage(props) {
 
   return (
     <div className="z-10 pt-6 pb-12 flex flex-col max-w-5xl items-center justify-between gap-2">
+      <Head>
+        <title>Submit Picks | Samosa Stats</title>
+      </Head>
       <p className="font-semibold text-2xl text-center px-8 pb-4">
         Submit your picks for {event.name}
       </p>
