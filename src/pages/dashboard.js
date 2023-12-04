@@ -12,6 +12,16 @@ export default function Dashboard(props) {
       <Head>
         <title>Dashboard | Samosa Stats</title>
       </Head>
+      {!setupEvents.length &&
+        !submissionClosedEvents.length &&
+        !completeEvents.length && (
+          <div>
+            <p className="text-3xl text-center mb-10">
+              Nothing to see here yet...
+            </p>
+          </div>
+        )}
+
       <div>
         {setupEvents.length > 0 && (
           <>
