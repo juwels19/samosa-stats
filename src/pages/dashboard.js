@@ -30,7 +30,7 @@ export default function Dashboard(props) {
             </p>
             <div
               className={`grid grid-cols-1 ${
-                submissionClosedEvents.length > 1 ? "md:grid-cols-2" : ""
+                setupEvents.length > 1 ? "md:grid-cols-2" : ""
               } gap-6`}
             >
               {setupEvents.map((event) => (
