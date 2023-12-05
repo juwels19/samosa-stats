@@ -141,8 +141,8 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  // const year = moment().year();
-  const year = 2024;
+  const year = moment().year();
+  // const year = 2024;
   const currentSeason = await prisma.season.findMany({
     where: {
       year: year,
