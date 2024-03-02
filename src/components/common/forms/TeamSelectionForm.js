@@ -65,6 +65,7 @@ export default function TeamSelectionForm(props) {
     <Spinner size="lg" />
   ) : (
     <div className="flex flex-col justify-center items-center gap-8">
+      <p className="font-semibold text-xl">{`${numTeamsSelected} out of ${maxNumTeams} teams selected`}</p>
       <div className="flex flex-row justify-evenly gap-2">
         <div className="flex flex-col justify-start gap-4 w-1/2">
           {teams.slice(0, Math.ceil(teams.length / 2)).map((team, index) => (

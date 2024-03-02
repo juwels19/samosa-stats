@@ -49,7 +49,7 @@ export default function EventPage(props) {
       <p className="font-semibold text-2xl text-center px-8 pb-4">
         Submit your picks for {event.name}
       </p>
-      <div className="flex flex-row justify-center gap-8">
+      <div className="grid grid-flow-row md:grid-flow-col gap-2 text-center">
         <a
           target="_blank"
           rel="noopener noreferrer"

@@ -2,6 +2,7 @@ import { categoryOptions as categories } from "@/data/categories";
 import { Button } from "@nextui-org/button";
 import { useState } from "react";
 import { Input, useDisclosure } from "@nextui-org/react";
+import { useRouter } from "next/router";
 import SuccessModal from "../modals/SuccessModal";
 
 export default function PickSubmissionForm(props) {
@@ -26,8 +27,15 @@ export default function PickSubmissionForm(props) {
   const {
     isOpen: isSuccessModalOpen,
     onOpen: onSuccessModalOpen,
-    onClose: onSuccessModalClose,
+    onClose,
   } = useDisclosure();
+
+  const router = useRouter();
+
+  const onSuccessModalClose = () => {
+    onClose();
+    router.push("/dashboard");
+  };
 
   const [isDisplayNameInvalid, setIsDisplayNameInvalid] = useState(false);
 

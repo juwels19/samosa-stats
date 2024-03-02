@@ -58,6 +58,7 @@ export default function CategorySelectionForm(props) {
 
   return (
     <div className="flex flex-col justify-center items-center gap-8">
+      <p className="font-semibold text-xl">{`${numCategoriesSelected} out of ${maxNumCategories} categories selected`}</p>
       <div className="flex flex-col gap-4 text-center px-4">
         {categories.map((category, index) => (
           <Button
