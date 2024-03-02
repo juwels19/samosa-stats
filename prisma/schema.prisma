@@ -6,45 +6,46 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Pick {
-  id Int @id @default(autoincrement())
-  createdAt String
-  userId String
+  id           Int     @id @default(autoincrement())
+  createdAt    String
+  userId       String
   userFullname String
-  displayName String?
-  answersJSON String
-  event Event @relation(fields: [eventId], references: [id])
-  eventId Int
+  displayName  String?
+  answersJSON  String
+  event        Event   @relation(fields: [eventId], references: [id])
+  eventId      Int
 
   @@unique([userId, eventId])
 }
 
 model Season {
-  id Int @id @default(autoincrement())
-  createdAt String
-  year Int
-  district String
+  id          Int     @id @default(autoincrement())
+  createdAt   String
+  year        Int
+  district    String
   districtKey String
-  events Event[]
+  events      Event[]
 }
 
 model Event {
-  id Int @id @default(autoincrement())
-  createdAt String
-  name String
-  season Season @relation(fields: [seasonId], references: [id])
-  seasonId Int
-  eventCode String @unique
-  startDate String
-  endDate String
-  isComplete Boolean @default(false)
-  isSubmissionClosed Boolean @default(false)
-  isSetup Boolean? @default(false)
-  picks Pick[]
-  numberOfTeamPicks Int @default(8)
-  numberOfCategoryPicks Int @default(5)
+  id                    Int      @id @default(autoincrement())
+  createdAt             String
+  name                  String
+  season                Season   @relation(fields: [seasonId], references: [id])
+  seasonId              Int
+  eventCode             String   @unique
+  startDate             String
+  endDate               String
+  isComplete            Boolean  @default(false)
+  isSubmissionClosed    Boolean  @default(false)
+  isSetup               Boolean? @default(false)
+  picks                 Pick[]
+  numberOfTeamPicks     Int      @default(8)
+  numberOfCategoryPicks Int      @default(5)
 }
