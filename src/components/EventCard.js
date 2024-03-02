@@ -12,6 +12,7 @@ export default function EventCard(props) {
     isAdminCard,
     isComplete,
     isSetup,
+    hasSubmitted,
   } = props;
 
   const router = useRouter();
@@ -27,6 +28,11 @@ export default function EventCard(props) {
 
   return (
     <Card isHoverable isPressable className="w-full" onPress={onCardClick}>
+      {!isAdminCard && hasSubmitted && (
+        <p className=" text-green-500 px-4 pt-2 w-full text-center">
+          ✅ Pick Submitted! ✅
+        </p>
+      )}
       <CardHeader className="font-semibold text-xl justify-center">
         {name}
       </CardHeader>

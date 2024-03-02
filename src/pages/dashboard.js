@@ -40,6 +40,7 @@ export default function Dashboard(props) {
                   startDate={event.startDate}
                   endDate={event.endDate}
                   eventCode={event.eventCode}
+                  hasSubmitted={event?.picks.length > 0}
                 />
               ))}
             </div>
@@ -65,6 +66,7 @@ export default function Dashboard(props) {
                 eventCode={event.eventCode}
                 isComplete={true}
                 isSubmissionClosed={event.isSubmissionClosed}
+                hasSubmitted={event?.picks.length > 0}
               />
             ))}
           </div>
@@ -88,6 +90,7 @@ export default function Dashboard(props) {
                 eventCode={event.eventCode}
                 isComplete={true}
                 isSubmissionClosed={event.isSubmissionClosed}
+                hasSubmitted={event?.picks.length > 0}
               />
             ))}
           </div>
@@ -112,6 +115,13 @@ export async function getServerSideProps(context) {
     orderBy: {
       startDate: "asc",
     },
+    include: {
+      picks: {
+        where: {
+          userId: userId,
+        },
+      },
+    },
   });
   const submissionClosedEvents = await prisma.event.findMany({
     where: {
@@ -120,6 +130,13 @@ export async function getServerSideProps(context) {
       isSubmissionClosed: true,
       isComplete: false,
     },
+    include: {
+      picks: {
+        where: {
+          userId: userId,
+        },
+      },
+    },
   });
   const completeEvents = await prisma.event.findMany({
     where: {
@@ -127,6 +144,13 @@ export async function getServerSideProps(context) {
       isSetup: true,
       isSubmissionClosed: true,
       isComplete: true,
+    },
+    include: {
+      picks: {
+        where: {
+          userId: userId,
+        },
+      },
     },
   });
   return {
