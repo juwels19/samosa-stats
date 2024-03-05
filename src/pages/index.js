@@ -15,7 +15,7 @@ export default function Home() {
             Welcome to Samosa Stats
           </h1>
           <p className="max-w-[600px] text-zinc-500 md:text-xl dark:text-zinc-400">
-            The home of degenerate FRC fantasy robotics betting
+            The home of degenerate FRC fantasy robotics
           </p>
           <div className="flex flex-col gap-2 min-[400px]:flex-row">
             <CustomSignInButton label="Get Started" />
@@ -25,7 +25,7 @@ export default function Home() {
           src="/hero-pic.png"
           height={500}
           width={500}
-          alt="Degenerate FRC betting"
+          alt="Degenerate FRC robotics"
         />
       </div>
     </div>
