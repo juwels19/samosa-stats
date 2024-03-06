@@ -8,9 +8,12 @@ import createEventsForSeason from "@/utils/createEventsForSeason";
 import EventCard from "@/components/EventCard";
 import ErrorModal from "@/components/common/modals/ErrorModal";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 export default function Setup(props) {
-  const { currentSeason, events, year } = props;
+  const { currentSeason, events, year, isApprover } = props;
+
+  const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -79,6 +82,24 @@ export default function Setup(props) {
       <Head>
         <title>Setup | Samosa Stats</title>
       </Head>
+      <div className="grid grid-cols-2 grid-flow-row justify-center gap-4">
+        <Button
+          onClick={() => router.push("/dashboard")}
+          color="primary"
+          radius="sm"
+        >
+          Go to dashboard
+        </Button>
+        {isApprover && (
+          <Button
+            onClick={() => router.push("/approvals")}
+            color="primary"
+            radius="sm"
+          >
+            Go to approvals
+          </Button>
+        )}
+      </div>
       {_currentSeason.length === 0 ? (
         <>
           <p className="font-semibold text-xl md:text-2xl">
@@ -169,6 +190,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       currentSeason: currentSeason,
+      isApprover: user.privateMetadata.approver,
       seasonId: seasonId,
       events: events,
       year: year,

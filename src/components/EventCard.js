@@ -48,7 +48,7 @@ export default function EventCard(props) {
           Picks Due:{" "}
           <span className="font-normal">
             {moment(startDate)
-              .subtract(1, "day")
+              .add(1, "day")
               .endOf("day")
               .format("MMMM Do, h:mm:ss a")}
           </span>

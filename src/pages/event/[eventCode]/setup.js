@@ -9,6 +9,7 @@ import EventSetupForm from "@/components/common/forms/EventSetupForm";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { FaArrowLeftLong } from "react-icons/fa6";
+import { sendEventSubmissionReminder } from "@/utils/discordWebhook";
 
 export default function EventSetupPage(props) {
   const { event } = props;
@@ -30,6 +31,27 @@ export default function EventSetupPage(props) {
         >
           Back to Setup
         </Button>
+        <Button
+          color="secondary"
+          className="mb-2"
+          onClick={() =>
+            sendEventSubmissionReminder(event.name, event.startDate)
+          }
+        >
+          Send Event Reminder
+        </Button>
+        <div
+          className={`grid grid-flow-row grid-cols-1 md:grid-cols-2 justify-center gap-4`}
+        >
+          <Button color="warning">
+            {event.isSubmissionClosed
+              ? "Open submissions"
+              : "Close submissions"}
+          </Button>
+          <Button color="warning">
+            {event.isComplete ? "Mark complete" : "Mark incomplete"}
+          </Button>
+        </div>
         <p className="font-semibold text-2xl text-center">
           {event.name} Setup Page
         </p>

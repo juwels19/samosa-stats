@@ -1,17 +1,51 @@
 import EventCard from "@/components/EventCard";
 import { clerkClient, getAuth } from "@clerk/nextjs/server";
+import { useRouter } from "next/router";
 import prisma from "@prisma/index";
 import moment from "moment";
 import Head from "next/head";
+import { Button } from "@nextui-org/react";
 
 export default function Dashboard(props) {
-  const { setupEvents, submissionClosedEvents, completeEvents } = props;
+  const {
+    setupEvents,
+    submissionClosedEvents,
+    completeEvents,
+    isAdmin,
+    isApprover,
+  } = props;
+
+  const router = useRouter();
 
   return (
     <div className="z-10 py-8 px-4 flex flex-col max-w-5xl items-center justify-between gap-8">
       <Head>
         <title>Dashboard | Samosa Stats</title>
       </Head>
+      <div
+        className={`grid grid-flow-row justify-center gap-4 ${
+          isAdmin ? "grid-cols-2" : "grid-cols-1"
+        }`}
+      >
+        {isAdmin && (
+          <Button
+            onClick={() => router.push("/setup")}
+            color="primary"
+            radius="sm"
+          >
+            Go to event setup
+          </Button>
+        )}
+        {isApprover && (
+          <Button
+            onClick={() => router.push("/approvals")}
+            color="primary"
+            radius="sm"
+          >
+            Go to approvals
+          </Button>
+        )}
+      </div>
       {!setupEvents.length &&
         !submissionClosedEvents.length &&
         !completeEvents.length && (
@@ -156,6 +190,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       isAdmin: user.privateMetadata.admin ? true : false,
+      isApprover: user.privateMetadata.approver,
       setupEvents: setupEvents,
       completeEvents: completeEvents,
       submissionClosedEvents: submissionClosedEvents,

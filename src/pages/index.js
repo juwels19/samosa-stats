@@ -15,7 +15,8 @@ export default function Home() {
             Welcome to Samosa Stats
           </h1>
           <p className="max-w-[600px] text-zinc-500 md:text-xl dark:text-zinc-400">
-            The home of degenerate FRC fantasy robotics
+            The home of degenerate FRC fantasy robotics... Talk to the taxman if
+            you want in
           </p>
           <div className="flex flex-col gap-2 min-[400px]:flex-row">
             <CustomSignInButton label="Get Started" />
