@@ -154,7 +154,7 @@ export default function Setup(props) {
 export async function getServerSideProps(context) {
   const { userId } = getAuth(context.req);
   const user = await clerkClient.users.getUser(userId);
-  if (!user.privateMetadata.admin) {
+  if (!user.privateMetadata.admin || !user.privateMetadata.approved) {
     return {
       redirect: {
         destination: "/dashboard",

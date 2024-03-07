@@ -148,6 +148,14 @@ export default function EventPage(props) {
 export async function getServerSideProps(context) {
   const { userId } = getAuth(context.req);
   const user = await clerkClient.users.getUser(userId);
+  if (!user.privateMetadata.approved) {
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: true,
+      },
+    };
+  }
   // Get and return the event from the DB
   const { eventCode } = context.query;
   const event = await prisma.event.findUnique({
