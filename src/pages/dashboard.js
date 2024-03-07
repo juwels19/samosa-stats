@@ -26,10 +26,12 @@ export default function Dashboard(props) {
       {!isApproved && (
         <>
           <p className="text-3xl text-center">
-            Number one rule of Samosa Stats... Don't talk about Samosa Stats.
+            Number one rule of Samosa Stats... Don&apos;t talk about Samosa
+            Stats.
             <br />
             <br />
-            JKJK just ask the Taxman why you aren't in yet and check back soon.
+            JKJK just message @fxdx on Discord to request access and check back
+            soon.
           </p>
         </>
       )}
