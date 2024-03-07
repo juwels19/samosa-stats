@@ -90,6 +90,7 @@ export async function getServerSideProps(context) {
   }
 
   const pendingUsers = [];
+  const acceptedUsers = [];
   users.map((user) => {
     if (!user.privateMetadata.approved) {
       pendingUsers.push({
@@ -100,12 +101,7 @@ export async function getServerSideProps(context) {
         lastName: user.lastName,
         approved: false,
       });
-    }
-  });
-
-  const acceptedUsers = [];
-  users.map((user) => {
-    if (user.privateMetadata.approved) {
+    } else {
       acceptedUsers.push({
         id: user.id,
         imageUrl: user.imageUrl,
@@ -117,12 +113,10 @@ export async function getServerSideProps(context) {
     }
   });
 
-  console.log(user.privateMetadata);
-
   return {
     props: {
       isAdmin: user.privateMetadata.admin ? true : false,
-      isApprover: user.privateMetadata.approver,
+      isApprover: user.privateMetadata.approver ? true : false,
       pendingUsers,
       acceptedUsers,
     },

@@ -93,7 +93,7 @@ export default function UserCard(props) {
   return (
     <div className="flex flex-row justify-between gap-4">
       <User
-        name={`${user.firstName} ${user.lastName}`}
+        name={`${user.firstName} ${user.lastName ? user.lastName : ""}`}
         description={roles.length > 0 ? roles.join(", ") : undefined}
         avatarProps={{ src: user.imageUrl }}
         className="min-w-fit"
