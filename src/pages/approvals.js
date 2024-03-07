@@ -79,7 +79,7 @@ export default function Approvals(props) {
 export async function getServerSideProps(context) {
   const { userId } = getAuth(context.req);
   const user = await clerkClient.users.getUser(userId);
-  const users = await clerkClient.users.getUserList();
+  const users = await clerkClient.users.getUserList({ limit: 100 });
   if (!user.privateMetadata.approver) {
     return {
       redirect: {
