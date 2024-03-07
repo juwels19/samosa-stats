@@ -40,16 +40,17 @@ export default function EventCard(props) {
         <p className="font-bold">
           Event Dates:{" "}
           <span className="font-normal">
-            {moment(startDate).format("MMMM Do")} to{" "}
-            {moment(endDate).format("MMMM Do")}
+            {moment.utc(startDate).format("MMMM Do")} to{" "}
+            {moment.utc(endDate).format("MMMM Do")}
           </span>
         </p>
         <p className="font-bold">
           Picks Due:{" "}
           <span className="font-normal">
-            {moment(startDate)
-              .add(1, "day")
+            {moment
+              .utc(startDate)
               .endOf("day")
+              .subtract(12, "hours")
               .format("MMMM Do, h:mm:ss a")}
           </span>
         </p>

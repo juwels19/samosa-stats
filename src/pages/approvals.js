@@ -3,9 +3,12 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { Button } from "@nextui-org/react";
 import UserCard from "@/components/UserCard";
+import { useState } from "react";
 
 export default function Approvals(props) {
   const { pendingUsers, acceptedUsers, isAdmin, isApprover } = props;
+  const [pendingUsersArr, setPendingUsersArr] = useState(pendingUsers);
+  const [acceptedUsersArr, setAcceptedUsersArr] = useState(acceptedUsers);
   const router = useRouter();
 
   return (
@@ -41,21 +44,30 @@ export default function Approvals(props) {
       <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-48`}>
         <div className="flex flex-col gap-4">
           <p className="text-2xl text-center font-semibold">Pending Degens</p>
-          {pendingUsers.length === 0 && (
-            <p>Nobody wants to join the degeneracy :(</p>
+          {pendingUsersArr.length === 0 && (
+            <p>Nobody wants to join the degeneracy... big sad</p>
           )}
-          {pendingUsers.map((user) => (
-            <UserCard key={user.id} user={user} />
-          ))}
-        </div>
-        <div className="flex flex-col gap-4">
-          <p className="text-2xl text-center font-semibold">Approved Degens</p>
-          {acceptedUsers.map((user) => (
+          {pendingUsersArr.map((user) => (
             <UserCard
               key={user.id}
               user={user}
               isAdmin={isAdmin}
               isApprover={isApprover}
+              setPendingUsersArr={setPendingUsersArr}
+              setAcceptedUsersArr={setAcceptedUsersArr}
+            />
+          ))}
+        </div>
+        <div className="flex flex-col gap-4 min-w-min">
+          <p className="text-2xl text-center font-semibold">Approved Degens</p>
+          {acceptedUsersArr.map((user) => (
+            <UserCard
+              key={user.id}
+              user={user}
+              isAdmin={isAdmin}
+              isApprover={isApprover}
+              setPendingUsersArr={setPendingUsersArr}
+              setAcceptedUsersArr={setAcceptedUsersArr}
             />
           ))}
         </div>

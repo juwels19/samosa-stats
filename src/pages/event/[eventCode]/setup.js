@@ -9,12 +9,29 @@ import EventSetupForm from "@/components/common/forms/EventSetupForm";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { FaArrowLeftLong } from "react-icons/fa6";
-import { sendEventSubmissionReminder } from "@/utils/discordWebhook";
+import {
+  sendEventSubmissionReminder,
+  sendEventSubmissionsClosedMessage,
+} from "@/utils/discordWebhook";
+import { useState } from "react";
 
 export default function EventSetupPage(props) {
   const { event } = props;
   const router = useRouter();
-  console.log(event.picks);
+  const [submissionState, setSubmissionState] = useState(
+    event.isSubmissionClosed
+  );
+  const [eventState, setEventState] = useState(event.isComplete);
+
+  const onToggleSubmissions = () => {
+    // call api endpoint to toggle submissions open/closed and update state
+    sendEventSubmissionsClosedMessage(event.name);
+  };
+
+  const onToggleEventStatus = () => {
+    // call api endpoint to toggle event status (marking complete)
+  };
+
   return (
     <div className="z-10 pt-6 pb-12 flex flex-col max-w-5xl items-center justify-between gap-6">
       <Head>
@@ -40,18 +57,16 @@ export default function EventSetupPage(props) {
         >
           Send Event Reminder
         </Button>
-        <div
+        {/* <div
           className={`grid grid-flow-row grid-cols-1 md:grid-cols-2 justify-center gap-4`}
         >
-          <Button color="warning">
+          <Button color="warning" onClick={onToggleSubmissions}>
             {event.isSubmissionClosed
               ? "Open submissions"
               : "Close submissions"}
           </Button>
-          <Button color="warning">
-            {event.isComplete ? "Mark complete" : "Mark incomplete"}
-          </Button>
-        </div>
+          <Button color="warning">Mark event complete</Button>
+        </div> */}
         <p className="font-semibold text-2xl text-center">
           {event.name} Setup Page
         </p>

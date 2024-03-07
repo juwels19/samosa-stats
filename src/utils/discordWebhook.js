@@ -7,7 +7,7 @@ const sendDiscordMessage = async (embed) => {
     embeds: [embed],
   };
 
-  await fetch(testDiscordWebhookUrl, {
+  await fetch(discordWebhookUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -29,11 +29,19 @@ export const generateEventSubmissionsOpenMessage = (eventName) => {
 export const sendEventSubmissionReminder = (eventName, eventStartDate) => {
   const embed = {
     title: `Reminder to submit your picks for the ${eventName}!`,
-    description: `Login to Samosa Stats and submit your picks!\n\nSubmissions will close at 11:59pm on ${moment(
-      eventStartDate
-    )
-      .add(1, "day")
+    description: `Login to Samosa Stats and submit your picks!\n\nSubmissions will close at noon on ${moment
+      .utc(eventStartDate)
       .format("MMMM Do")}.\n\n[samosastats.com](https://samosastats.com)`,
+    color: "6316287",
+  };
+  sendDiscordMessage(embed);
+};
+
+export const sendEventSubmissionsClosedMessage = (eventName) => {
+  const embed = {
+    title: `Picks are now closed for ${eventName}!`,
+    description:
+      "If you didn't submit your picks, too bad...\n\n[samosastats.com](https://samosastats.com)",
     color: "6316287",
   };
   sendDiscordMessage(embed);
