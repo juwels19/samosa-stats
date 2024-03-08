@@ -73,7 +73,7 @@ export default function Dashboard(props) {
           <div>
             {setupEvents.length > 0 && (
               <>
-                <p className="text-3xl text-center mb-10">
+                <p className="text-3xl text-center">
                   Events open for submission:
                 </p>
                 <div
@@ -97,7 +97,7 @@ export default function Dashboard(props) {
           </div>
           {submissionClosedEvents.length > 0 && (
             <>
-              <p className="text-3xl text-center mb-10">
+              <p className="text-3xl text-center">
                 Events closed for submission:
               </p>
               <div
@@ -122,7 +122,7 @@ export default function Dashboard(props) {
           )}
           {completeEvents.length > 0 && (
             <>
-              <p className="text-3xl text-center mb-10">Completed events:</p>
+              <p className="text-3xl text-center">Completed events:</p>
               <div
                 className={`grid grid-cols-1 ${
                   completeEvents.length > 1 ? "md:grid-cols-2" : ""
