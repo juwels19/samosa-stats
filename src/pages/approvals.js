@@ -79,11 +79,11 @@ export default function Approvals(props) {
         </div>
         <div className="flex flex-col gap-4 min-w-min ">
           <p className="text-2xl text-center font-semibold">
-            Pranit's Pick List <br />
+            Pranit&apos;s Pick List <br />
             (Rejected Degens)
           </p>
           {rejectedUsersArr.length === 0 && (
-            <p>Wow, can't believe Pranit wouldn't pick anyone</p>
+            <p>Wow, can&apos;t believe Pranit wouldn&apos;t pick anyone</p>
           )}
           {rejectedUsersArr.map((user) => (
             <UserCard
