@@ -159,6 +159,7 @@ export async function getServerSideProps(context) {
     where: {
       season: season.id,
       isSetup: true,
+      isSubmissionClosed: false,
       isComplete: false,
     },
     orderBy: {
