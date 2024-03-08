@@ -39,7 +39,7 @@ export const sendEventSubmissionReminder = (eventName, eventStartDate) => {
 
 export const sendEventSubmissionsClosedMessage = (eventName) => {
   const embed = {
-    title: `Picks are now closed for ${eventName}!`,
+    title: `GATES ARE NOW CLOSED FOR ${eventName}!`,
     description:
       "If you didn't submit your picks, too bad...\n\n[samosastats.com](https://samosastats.com)",
     color: "6316287",

@@ -2,11 +2,18 @@ import { Button, Tooltip, User } from "@nextui-org/react";
 import { useState } from "react";
 
 export default function UserCard(props) {
-  const { user, isAdmin, isApprover, setPendingUsersArr, setAcceptedUsersArr } =
-    props;
+  const {
+    user,
+    isAdmin,
+    isApprover,
+    setPendingUsersArr,
+    setAcceptedUsersArr,
+    setRejectedUsersArr,
+  } = props;
   const [isApprovalLoading, setIsApprovalLoading] = useState(false);
   const [isRevokeLoading, setIsRevokeLoading] = useState(false);
   const [isToggleApproverLoading, setIsToggleApproverLoading] = useState(false);
+  const [isRejectingLoading, setIsRejectingLoading] = useState(false);
 
   const roles = [];
 
@@ -90,15 +97,48 @@ export default function UserCard(props) {
     setIsToggleApproverLoading(false);
   };
 
+  const onReject = async (usrIdToReject) => {
+    setIsRejectingLoading(true);
+    const body = { userId: usrIdToReject, isRejected: true };
+    await fetch("/api/users/reject", {
+      method: "POST",
+      body: JSON.stringify(body),
+    });
+    setRejectedUsersArr((oldArr) => [
+      ...oldArr,
+      {
+        id: user.id,
+        imageUrl: user.imageUrl,
+        privateMetadata: {
+          ...user.privateMetadata,
+          approved: false,
+          rejected: true,
+        },
+        firstName: user.firstName,
+        lastName: user.lastName,
+        approved: false,
+        rejected: true,
+      },
+    ]);
+    setPendingUsersArr((oldArr) =>
+      oldArr.filter((item) => item.id !== usrIdToReject)
+    );
+    setIsRejectingLoading(false);
+  };
+
   return (
-    <div className="flex flex-row justify-between gap-4">
+    <div
+      className={`flex flex-row gap-4 ${
+        user.rejected ? "justify-center" : "justify-between"
+      }`}
+    >
       <User
         name={`${user.firstName} ${user.lastName ? user.lastName : ""}`}
         description={roles.length > 0 ? roles.join(", ") : undefined}
         avatarProps={{ src: user.imageUrl }}
         className="min-w-fit"
       />
-      {!user.approved && isApprover && (
+      {!user.approved && !user.rejected && isApprover && (
         <div className="grid grid-flow-col gap-2 min-w-fit">
           <Button
             color="success"
@@ -106,6 +146,14 @@ export default function UserCard(props) {
             isLoading={isApprovalLoading}
           >
             Accept
+          </Button>
+          <Button
+            variant="light"
+            color="danger"
+            isLoading={isRejectingLoading}
+            onClick={() => onReject(user.id)}
+          >
+            Reject
           </Button>
         </div>
       )}

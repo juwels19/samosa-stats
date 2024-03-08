@@ -6,13 +6,15 @@ import UserCard from "@/components/UserCard";
 import { useState } from "react";
 
 export default function Approvals(props) {
-  const { pendingUsers, acceptedUsers, isAdmin, isApprover } = props;
+  const { pendingUsers, acceptedUsers, rejectedUsers, isAdmin, isApprover } =
+    props;
   const [pendingUsersArr, setPendingUsersArr] = useState(pendingUsers);
   const [acceptedUsersArr, setAcceptedUsersArr] = useState(acceptedUsers);
+  const [rejectedUsersArr, setRejectedUsersArr] = useState(rejectedUsers);
   const router = useRouter();
 
   return (
-    <div className="z-10 py-8 px-10 flex flex-col max-w-5xl items-center text-center justify-between gap-8">
+    <div className="z-10 py-8 px-10 flex flex-col max-w-7xl items-center text-center justify-between gap-8">
       <Head>
         <title>Approvals | Samosa Stats</title>
       </Head>
@@ -41,7 +43,9 @@ export default function Approvals(props) {
       <p className="text-3xl text-center mb-2 font-semibold">
         The FRC Degenerates
       </p>
-      <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-48`}>
+      <div
+        className={`grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-2 lg:gap-8`}
+      >
         <div className="flex flex-col gap-4">
           <p className="text-2xl text-center font-semibold">Pending Degens</p>
           {pendingUsersArr.length === 0 && (
@@ -55,6 +59,7 @@ export default function Approvals(props) {
               isApprover={isApprover}
               setPendingUsersArr={setPendingUsersArr}
               setAcceptedUsersArr={setAcceptedUsersArr}
+              setRejectedUsersArr={setRejectedUsersArr}
             />
           ))}
         </div>
@@ -68,6 +73,27 @@ export default function Approvals(props) {
               isApprover={isApprover}
               setPendingUsersArr={setPendingUsersArr}
               setAcceptedUsersArr={setAcceptedUsersArr}
+              setRejectedUsersArr={setRejectedUsersArr}
+            />
+          ))}
+        </div>
+        <div className="flex flex-col gap-4 min-w-min ">
+          <p className="text-2xl text-center font-semibold">
+            Pranit's Pick List <br />
+            (Rejected Degens)
+          </p>
+          {rejectedUsersArr.length === 0 && (
+            <p>Wow, can't believe Pranit wouldn't pick anyone</p>
+          )}
+          {rejectedUsersArr.map((user) => (
+            <UserCard
+              key={user.id}
+              user={user}
+              isAdmin={isAdmin}
+              isApprover={isApprover}
+              setPendingUsersArr={setPendingUsersArr}
+              setAcceptedUsersArr={setAcceptedUsersArr}
+              setRejectedUsersArr={setRejectedUsersArr}
             />
           ))}
         </div>
@@ -91,7 +117,20 @@ export async function getServerSideProps(context) {
 
   const pendingUsers = [];
   const acceptedUsers = [];
+  const rejectedUsers = [];
   users.map((user) => {
+    if (user.privateMetadata.rejected) {
+      rejectedUsers.push({
+        id: user.id,
+        imageUrl: user.imageUrl,
+        privateMetadata: user.privateMetadata,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        approved: false,
+        rejected: true,
+      });
+      return;
+    }
     if (!user.privateMetadata.approved) {
       pendingUsers.push({
         id: user.id,
@@ -119,6 +158,7 @@ export async function getServerSideProps(context) {
       isApprover: user.privateMetadata.approver ? true : false,
       pendingUsers,
       acceptedUsers,
+      rejectedUsers,
     },
   };
 }

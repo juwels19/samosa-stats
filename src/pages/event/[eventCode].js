@@ -17,6 +17,8 @@ import {
 } from "@/constants";
 import { Button } from "@nextui-org/button";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { FaArrowLeftLong } from "react-icons/fa6";
 
 export default function EventPage(props) {
   const { event, userId, userFullname } = props;
@@ -41,13 +43,29 @@ export default function EventPage(props) {
 
   const [areTeamsLoading, setAreTeamsLoading] = useState(false);
 
+  const router = useRouter();
+
   return (
     <div className="z-10 pt-6 pb-12 flex flex-col max-w-5xl items-center justify-between gap-2">
       <Head>
         <title>Submit Picks | Samosa Stats</title>
       </Head>
+      <div className="flex flex-row justify-start w-full">
+        <Button
+          variant="light"
+          startContent={<FaArrowLeftLong />}
+          onClick={() => {
+            router.push("/dashboard");
+          }}
+          className="justify-start max-w-fit"
+        >
+          Back to dashboard
+        </Button>
+      </div>
       <p className="font-semibold text-2xl text-center px-8 pb-4">
-        Submit your picks for {event.name}
+        {!event.isSubmissionClosed
+          ? `Submit your picks for ${event.name}`
+          : `Your picks for ${event.name}`}
       </p>
       <div className="grid grid-flow-row md:grid-flow-col gap-2 text-center">
         <a
