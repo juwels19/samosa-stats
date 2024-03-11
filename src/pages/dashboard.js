@@ -73,7 +73,7 @@ export default function Dashboard(props) {
           <div>
             {setupEvents.length > 0 && (
               <>
-                <p className="text-3xl text-center">
+                <p className="text-3xl text-center mb-4">
                   Events open for submission:
                 </p>
                 <div
