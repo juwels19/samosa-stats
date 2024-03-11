@@ -73,7 +73,7 @@ export default function EventSetupForm(props) {
     _event = _event.body;
     setEvent(_event);
     setIsSetup(_event.isSetup);
-    generateEventSubmissionsOpenMessage(event.name);
+    generateEventSubmissionsOpenMessage(event.name, event.eventCode);
     setIsUpdateLoading(false);
     onSuccessModalOpen();
   };

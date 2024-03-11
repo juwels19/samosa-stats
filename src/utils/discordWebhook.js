@@ -16,22 +16,27 @@ const sendDiscordMessage = async (embed) => {
   });
 };
 
-export const generateEventSubmissionsOpenMessage = (eventName) => {
+export const generateEventSubmissionsOpenMessage = (eventName, eventCode) => {
   const embed = {
     title: `${eventName} is now open for picks!`,
-    description:
-      "Login to Samosa Stats and submit your picks!\n\n[samosastats.com](https://samosastats.com)",
+    description: `Login to Samosa Stats and submit your picks!\n\n[samosastats.com/event/${eventCode}](https://samosastats.com/event/${eventCode})`,
     color: "6316287",
   };
   sendDiscordMessage(embed);
 };
 
-export const sendEventSubmissionReminder = (eventName, eventStartDate) => {
+export const sendEventSubmissionReminder = (
+  eventName,
+  eventStartDate,
+  eventCode
+) => {
   const embed = {
     title: `Reminder to submit your picks for the ${eventName}!`,
     description: `Login to Samosa Stats and submit your picks!\n\nSubmissions will close at noon on ${moment
       .utc(eventStartDate)
-      .format("MMMM Do")}.\n\n[samosastats.com](https://samosastats.com)`,
+      .format(
+        "MMMM Do"
+      )}.\n\n[samosastats.com/event/${eventCode}](https://samosastats.com/event/${eventCode})`,
     color: "6316287",
   };
   sendDiscordMessage(embed);

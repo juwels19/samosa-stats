@@ -52,7 +52,11 @@ export default function EventSetupPage(props) {
           color="secondary"
           className="mb-2"
           onClick={() =>
-            sendEventSubmissionReminder(event.name, event.startDate)
+            sendEventSubmissionReminder(
+              event.name,
+              event.startDate,
+              event.eventCode
+            )
           }
         >
           Send Event Reminder
