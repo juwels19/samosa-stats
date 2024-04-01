@@ -41,8 +41,10 @@ export default function PickSubmissionForm(props) {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const displayNameCharLimit = 200;
+
   const handleDisplayNameChange = (value) => {
-    if (displayName.length < 100) {
+    if (displayName.length < displayNameCharLimit) {
       setIsDisplayNameInvalid(false);
     } else {
       setIsDisplayNameInvalid(true);
@@ -134,7 +136,9 @@ export default function PickSubmissionForm(props) {
         onChange={(event) => handleDisplayNameChange(event.target.value)}
         description={
           !isComplete || !isSubmissionClosed
-            ? `${100 - displayName.length} characters remaining`
+            ? `${
+                displayNameCharLimit - displayName.length
+              } characters remaining`
             : ""
         }
       />
